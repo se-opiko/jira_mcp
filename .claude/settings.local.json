@@ -1,5 +1,7 @@
 {
   "enabledMcpjsonServers": [
-    "atlassian"
-  ]
+    "atlassian",
+    "github"
+  ],
+  "enableAllProjectMcpServers": true
 }
