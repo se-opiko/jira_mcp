@@ -3,5 +3,6 @@
     "atlassian",
     "github"
   ],
-  "enableAllProjectMcpServers": true
+  "enableAllProjectMcpServers": true,
+  "model": "claude-sonnet-4-0"
 }
