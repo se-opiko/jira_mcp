@@ -1,0 +1,39 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: blog-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/var/www/backend
+      - /var/www/backend/vendor
+    networks:
+      - blog-network
+    environment:
+      - APP_ENV=local
+      - APP_DEBUG=true
+    command: php artisan serve --host=0.0.0.0 --port=8000
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: blog-frontend
+    ports:
+      - "3000:3000"
+      - "24678:24678"  # Nuxt DevTools
+    volumes:
+      - ./frontend:/var/www/frontend
+      - /var/www/frontend/node_modules
+    networks:
+      - blog-network
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - backend
+
+networks:
+  blog-network:
+    driver: bridge

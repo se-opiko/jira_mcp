@@ -1,0 +1,172 @@
+/* レスポンシブデザイン用スタイル */
+
+/* モバイルファースト - ベーススタイルはモバイル向け */
+
+/* タブレット（768px以上） */
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+
+  .container {
+    padding: 0 2rem;
+  }
+}
+
+/* デスクトップ小（1024px以上） */
+@media (min-width: 1024px) {
+  .container {
+    padding: 0 2.5rem;
+  }
+}
+
+/* デスクトップ大（1280px以上） */
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+
+/* レスポンシブユーティリティクラス */
+
+/* モバイルのみ表示 */
+.mobile-only {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .mobile-only {
+    display: none;
+  }
+}
+
+/* タブレット以上で表示 */
+.tablet-up {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .tablet-up {
+    display: block;
+  }
+}
+
+/* デスクトップのみ表示 */
+.desktop-only {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .desktop-only {
+    display: block;
+  }
+}
+
+/* レスポンシブグリッド */
+.grid-responsive {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .grid-responsive {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-responsive {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+}
+
+/* レスポンシブテキスト */
+.text-responsive {
+  font-size: 1rem;
+}
+
+@media (min-width: 768px) {
+  .text-responsive {
+    font-size: 1.125rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .text-responsive {
+    font-size: 1.25rem;
+  }
+}
+
+/* レスポンシブパディング */
+.padding-responsive {
+  padding: 1rem;
+}
+
+@media (min-width: 768px) {
+  .padding-responsive {
+    padding: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .padding-responsive {
+    padding: 2rem;
+  }
+}
+
+/* タッチデバイス対応 */
+@media (hover: none) and (pointer: coarse) {
+  /* タッチデバイス向けのスタイル */
+  button,
+  a {
+    min-height: 44px; /* タッチターゲットサイズの最小値 */
+    min-width: 44px;
+  }
+}
+
+/* 高解像度ディスプレイ対応 */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  /* Retina ディスプレイ向けのスタイル */
+  img {
+    image-rendering: -webkit-optimize-contrast;
+  }
+}
+
+/* 縦向き・横向き対応 */
+@media (orientation: landscape) {
+  /* 横向き時のスタイル */
+}
+
+@media (orientation: portrait) {
+  /* 縦向き時のスタイル */
+}
+
+/* アクセシビリティ - モーション削減 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* 印刷メディア */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    font-size: 12pt;
+    line-height: 1.5;
+  }
+
+  a[href^="http"]:after {
+    content: " (" attr(href) ")";
+  }
+}
