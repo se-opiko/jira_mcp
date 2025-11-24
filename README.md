@@ -1,104 +1,129 @@
 # ブログアプリケーション
 
-Nuxt.js (フロントエンド) + Laravel (バックエンド) で構築されたブログシステム
+Nuxt.js（フロントエンド）とLaravel（バックエンド）で構築されたブログアプリケーションです。
 
-## プロジェクト構成
+## 🚀 クイックスタート
 
-```
-jira_mcp/
-├── frontend/          # Nuxt.js フロントエンド
-├── backend/           # Laravel バックエンド
-└── README.md
-```
+他のPCでも簡単に開発環境を構築できます。
 
-## 技術スタック
-
-### フロントエンド
-- **Nuxt.js** 4.x
-- **Vue.js** 3.x
-- **marked.js** - Markdown変換ライブラリ
-
-### バックエンド
-- **Laravel** 12.x
-- **PHP** 8.2+
-- **SQLite** (開発環境)
-
-## セットアップ
-
-### Docker環境での起動 (推奨)
-
-#### 前提条件
+### 前提条件
 - Docker
 - Docker Compose
 
-#### 起動方法
+### 環境構築
 
+1. **リポジトリをクローン**
 ```bash
-docker-compose up --build
+git clone <your-repository-url>
+cd jira_mcp_sample/jira_mcp
 ```
 
-サーバーが起動します:
-- フロントエンド: http://localhost:3000
-- バックエンド: http://localhost:8000
-
-#### 停止方法
-
+2. **コンテナを起動**
 ```bash
-docker-compose down
+docker compose up --build
 ```
 
-### ローカル環境での起動
+これだけで完了です！🎉
 
-#### 前提条件
-- Node.js 18.x 以上
-- PHP 8.2 以上
-- Composer
+### アクセス先
+- **フロントエンド**: http://localhost:3000
+- **バックエンドAPI**: http://localhost:8000
 
-#### フロントエンド
+## 📋 自動で実行される内容
 
+### バックエンド (Laravel)
+- ✅ Composer依存関係のインストール
+- ✅ .envファイルの作成（存在しない場合）
+- ✅ アプリケーションキーの生成
+- ✅ ファイル権限の設定
+- ✅ データベースマイグレーションの実行
+- ✅ サンプルデータの挿入（9件のブログ記事とテストユーザー）
+- ✅ キャッシュクリア
+
+### フロントエンド (Nuxt.js)
+- ✅ npm依存関係のインストール
+- ✅ marked.jsライブラリの自動インストール（Markdownレンダリング用）
+- ✅ 開発サーバーの起動
+
+## 🛠️ 手動コマンド
+
+必要に応じて個別にコマンドを実行できます：
+
+### バックエンド
+```bash
+cd backend
+
+# 依存関係のインストール
+composer install
+
+# マイグレーション実行
+php artisan migrate
+
+# サンプルデータの挿入
+php artisan db:seed
+
+# 開発サーバー起動
+php artisan serve --host=0.0.0.0 --port=8000
+```
+
+### フロントエンド
 ```bash
 cd frontend
+
+# 依存関係のインストール
 npm install
+
+# 開発サーバー起動
 npm run dev
 ```
 
-開発サーバーが起動します: http://localhost:3000
+## 🏗️ アーキテクチャ
 
-#### バックエンド
+- **フロントエンド**: Nuxt 4 + Vue 3 + marked.js
+- **バックエンド**: Laravel 12 + SQLite
+- **コンテナ**: Docker + Docker Compose
 
-```bash
-cd backend
-composer install
-php artisan serve
-```
+## 📝 初期データ
 
-APIサーバーが起動します: http://localhost:8000
+サンプルデータとして以下が自動で作成されます：
 
-## 開発
+**ユーザー**
+- Email: test@example.com
+- Name: Test User
 
-### フロントエンド (Nuxt.js)
+**記事**
+- 9件のサンプル記事（技術、デザイン、ライフスタイル各種カテゴリ）
 
-```bash
-npm run dev      # 開発サーバー起動
-npm run build    # 本番用ビルド
-npm run preview  # ビルド結果のプレビュー
-```
+## 🔄 再構築
 
-### バックエンド (Laravel)
+環境をクリーンな状態から再構築したい場合：
 
 ```bash
-php artisan serve           # 開発サーバー起動
-php artisan migrate         # マイグレーション実行
-php artisan make:controller # コントローラー作成
+# コンテナと関連データを削除
+docker compose down -v
+
+# 再ビルドして起動
+docker compose up --build
 ```
 
-## 機能
+## 🐛 トラブルシューティング
+
+### ポート競合
+もし3000番や8000番ポートが使用中の場合、docker-compose.ymlの`ports`セクションを編集してください。
+
+### 依存関係エラー
+コンテナを完全に再ビルドしてください：
+```bash
+docker compose down
+docker compose build --no-cache
+docker compose up
+```
+
+## 📱 機能
 
 - Markdownでのブログ記事作成
 - 記事の一覧表示
 - 記事の詳細表示
+- リアルタイムMarkdownプレビュー
 - レスポンシブデザイン
-
-## ライセンス
-
-MIT
+- カテゴリ・タグ機能
