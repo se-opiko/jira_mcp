@@ -31,8 +31,10 @@ chmod -R 775 /var/www/backend/bootstrap/cache
 
 # Create database if not exists
 echo "🗄️  Creating database file if not exists..."
+mkdir -p /var/www/backend/database
 touch /var/www/backend/database/database.sqlite
-chown www-data:www-data /var/www/backend/database/database.sqlite
+chown -R www-data:www-data /var/www/backend/database
+chmod 664 /var/www/backend/database/database.sqlite
 
 # Run migrations
 echo "📊 Running database migrations..."
