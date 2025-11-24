@@ -9,7 +9,6 @@ services:
     volumes:
       - ./backend:/var/www/backend
       - /var/www/backend/vendor
-      - /var/www/backend/database/database.sqlite
     networks:
       - blog-network
     environment:

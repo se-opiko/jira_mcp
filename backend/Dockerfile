@@ -35,7 +35,6 @@ RUN composer install --no-interaction --optimize-autoloader
 
 # Create SQLite database directory
 RUN mkdir -p /var/www/backend/database && \
-    touch /var/www/backend/database/database.sqlite && \
     chown -R www-data:www-data /var/www/backend/database
 
 # Expose port 8000
