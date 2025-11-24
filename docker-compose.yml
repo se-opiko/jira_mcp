@@ -9,12 +9,15 @@ services:
     volumes:
       - ./backend:/var/www/backend
       - /var/www/backend/vendor
+      - /var/www/backend/database/database.sqlite
     networks:
       - blog-network
     environment:
       - APP_ENV=local
       - APP_DEBUG=true
-    command: php artisan serve --host=0.0.0.0 --port=8000
+      - DB_CONNECTION=sqlite
+      - DB_DATABASE=/var/www/backend/database/database.sqlite
+    command: ./docker-setup.sh
 
   frontend:
     build:
@@ -33,6 +36,7 @@ services:
       - NODE_ENV=development
     depends_on:
       - backend
+    command: ./docker-setup.sh
 
 networks:
   blog-network:

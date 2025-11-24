@@ -19,5 +19,8 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+
+        // Run article seeder to populate sample articles
+        $this->call(ArticleSeeder::class);
     }
 }
