@@ -7,8 +7,9 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./backend:/var/www/backend
-      - /var/www/backend/vendor
+      - ./backend:/var/www/backend:cached
+      - backend_vendor:/var/www/backend/vendor
+      - backend_storage:/var/www/backend/storage
     networks:
       - blog-network
     environment:
@@ -27,8 +28,8 @@ services:
       - "3000:3000"
       - "24678:24678"  # Nuxt DevTools
     volumes:
-      - ./frontend:/var/www/frontend
-      - /var/www/frontend/node_modules
+      - ./frontend:/var/www/frontend:cached
+      - frontend_node_modules:/var/www/frontend/node_modules
     networks:
       - blog-network
     environment:
@@ -36,6 +37,11 @@ services:
     depends_on:
       - backend
     command: ./docker-setup.sh
+
+volumes:
+  backend_vendor:
+  backend_storage:
+  frontend_node_modules:
 
 networks:
   blog-network:
